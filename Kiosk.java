@@ -1,66 +1,11 @@
-
-//your main interface for the project, with the main method
-import util.Scanner;
-public class Kiosk {
-	public static void main (String[] args) {
-		System.out.println("Welcome to Kroger");
-		int ptotal = 0;
-		int itemNum;
-		int apples = 0;
-		int oranges = 0;
-		int melons = 0;
-		int berries = 0;
-		int grapes = 0;
-		System.out.println("Inventory: ");
-		System.out.println("1 Apple    $3.00");
-		System.out.println("1 Orange   $4.00");
-		System.out.println("1 Melon    $7.00");
-		System.out.println("1 Berrie   $2.00");
-		System.out.println("1 Grape    $2.00");
-		Scanner Keyboard = new scanner(keyboard);
-		System.out.println(Y"ou must type each item name exactly.  How many items would you like to buy (less than 10)?");;
-		String itemNumS = scan.nextLine();
-		itemNum = Integer.parseInt(itemNumS);
-		while (itemNum > 0) {
-			System.out.println("Item " + itemNum + ": ");
-			String item =  scan.nextLine();
-			if (item.equals("1 Apple")) {
-				ptotal = 3 + total;
-				apples = 1 + apples;
-			}
-			if (item.equals("1 Orange")) {
-				ptotal = 4 + total;
-				oranges = 1 + oranges;
-			}
-			if (item.equals("1 Melon")) {
-				ptotal = 7 + total;
-				melons = 1 + melons;
-			}
-			if (item.equals("1 Berrie")) {
-				ptotal = 2 + total;
-				berries = 1 + berries;
-			}
-			if (item.equals("1 Grape")) {
-				ptotal = 2 + total;
-				grapes = 1 + grapes;
-			}
-			else {
-				System.out.println("That is not an item. Try Again.");
-				itemNum = itemNum + 1;
-			}
-			itemNum = itemNum - 1;
-		}  //close while
-	}  //close main()
-} //closes kiosk()
-
-Version 2:
 import java.util.Scanner;
 
 public class Kiosk {
-	public int subtotal = 0;
+	public double subtotal = 0.00;
 	public double total = 0;
 	public double tax = 0;
 	public int itemNum;
+	public int itemQty = 0;
 	public int apples = 0;
 	public int oranges = 0;
 	public int melons = 0;
@@ -71,43 +16,46 @@ public class Kiosk {
 	public void Register() {
 		System.out.println("Welcome to Kroger");
 		System.out.println("\nInventory: ");
-		System.out.println("1 Apple    $3.00");
-		System.out.println("1 Orange   $4.00");
-		System.out.println("1 Melon    $7.00");
-		System.out.println("1 Berrie   $2.00");
-		System.out.println("1 Grape    $2.00");
+		System.out.println("1 Apple    $2.99");
+		System.out.println("1 Orange   $3.99");
+		System.out.println("1 Melon    $6.99");
+		System.out.println("1 Berrie   $0.99");
+		System.out.println("1 Grape    $1.99");
 		Scanner keyboard = new Scanner(System.in);
-		System.out.println("How many items would you like to purchase (You can only buy a max of 9 items): ");
+		System.out.print("How many differnt items would you like to purchase( Apple vs Melon vs Orange): ");
 		String itemNumS = keyboard.nextLine();
 		itemNum = Integer.parseInt(itemNumS);
-		System.out.println("You must type each item exactly how it's listed in the inventory (ex. 1 Apple) ");
+		System.out.print("You can only buy a max of 9 of each item.");
 		while (itemNum > 0) {
 			y++;
-			System.out.print("Item " + itemNum + ": ");
+			System.out.print("\nItem " + y + ": ");
 			item =  keyboard.nextLine();
-			if (item.equals("1 Apple")) {
-				subtotal = 3 + subtotal;
-				apples++;
+			String itemQtyS = item.substring(0,1);
+			itemQty = Integer.parseInt(itemQtyS);
+			String itemName = item.substring(2);
+			if (itemName.equals("Apple") || itemName.equals("Apples")) {
+				subtotal = (itemQty*2.99) + subtotal;
+				apples = apples + itemQty;
 			}
-			else if(item.equals("1 Orange")) {
-				subtotal = 4 + subtotal;
-				oranges++;
+			else if(itemName.equals("Orange") || itemName.equals("Oranges")) {
+				subtotal = (itemQty *3.99) + subtotal;
+				oranges = oranges + itemQty;
 			}
-			else if(item.equals("1 Melon")) {
-				subtotal = 7 + subtotal;
-				melons++;
+			else if(itemName.equals("Melon") || itemName.equals("Melons")) {
+				subtotal = (itemQty*6.99) + subtotal;
+				melons = melons + itemQty;
 			}
-			else if(item.equals("1 Berrie")) {
-				subtotal = 2 + subtotal;
-				berries++;
+			else if(item.equals("Berrie") || itemName.equals("Berries")) {
+				subtotal = (itemQty*.99) + subtotal;
+				berries = berries + itemQty;
 			}
-			else if(item.equals("1 Grape")) {
-				subtotal = 2 + subtotal;
-				grapes++;
+			else if(item.equals("Grape") || itemName.equals("Grapes")) {
+				subtotal = (itemQty*1.99) + subtotal;
+				grapes = grapes + itemQty;
 			}
 			else {
 				System.out.println("That is not an item. Try Again.");
-				itemNum++;
+				y++;
 			}
 			itemNum = itemNum - 1;
 		}  //close while loop
@@ -116,12 +64,10 @@ public class Kiosk {
 		tax = subtotal * .0575;
 		double rTax = (double) Math.round(tax * 100) / 100;
 		total = rTax + subtotal;
-		System.out.println("****************************************");
+		double rTotal = (double) Math.round(total * 100) / 100;
+		System.out.println("\n****************************************");
 		System.out.println("             Kroger Recipt              ");
 		System.out.println("Qty    Item                       Price ");
-//		System.out.println("Qty    Item              Tax:      $3.00");
-//		System.out.println("Qty    Item              Subtotal: $3.00");
-//		System.out.println("Qty    Item              Total:    $3.00");
 		String a = ("Apples");
 		String o = ("Oranges");
 		String m = ("Melons");
@@ -139,7 +85,7 @@ public class Kiosk {
 				System.out.print(" ");
 				x = x - 1;
 			}
-			System.out.print("$" + (3 * apples) + ".00");
+			System.out.print("$" + (2.99 * apples));
 		}
 		else if (apples > 1 ) {
 			System.out.print( "\n" + apples + "      " + "Apples");
@@ -148,7 +94,7 @@ public class Kiosk {
 				System.out.print(" ");
 				x = x - 1;
 			}
-			System.out.print("$" + (3 * apples) + ".00");
+			System.out.print("$" + (2.99 * apples));
 		}	
 		if (oranges == 1 ) {
 			System.out.print("\n" +  oranges + "      " + "Orange ");
@@ -157,7 +103,7 @@ public class Kiosk {
 				System.out.print(" ");
 				x = x - 1;
 			}
-			System.out.print("$" + (4 * oranges) + ".00");
+			System.out.print("$" + (3.99 * oranges));
 		}
 		else if (oranges > 1) {
 			System.out.print("\n" + oranges + "      "  + "Oranges");
@@ -166,7 +112,7 @@ public class Kiosk {
 				System.out.print(" ");
 				x = x - 1;
 			}
-			System.out.print("$" + (4 * oranges) + ".00");
+			System.out.print("$" + (3.99 * oranges));
 		}
 		if (melons == 1) {
 			System.out.print("\n" + melons + "      " + "Melon ");
@@ -175,7 +121,7 @@ public class Kiosk {
 				System.out.print(" ");
 				x = x - 1;
 			}
-			System.out.print("$" + (7 * melons) + ".00");
+			System.out.print("$" + (6.99 * melons));
 		}
 		else if (melons > 1) {
 			System.out.print("\n" + melons + "      " + "Melons");
@@ -184,7 +130,7 @@ public class Kiosk {
 				System.out.print(" ");
 				x = x - 1;
 			}
-			System.out.print("$" + (7 * melons) + ".00");
+			System.out.print("$" + (6.99 * melons));
 		}
 		if (berries == 1) {
 			System.out.print("\n" + berries + "      " + "Berrie ");
@@ -193,7 +139,7 @@ public class Kiosk {
 				System.out.print(" ");
 				x = x - 1;
 			}
-			System.out.print("$" + (2 * berries) + ".00");
+			System.out.print("$" + (0.99 * berries));
 		}
 		else if (berries > 1) {
 			System.out.print("\n" + berries + "      " + "Berries");
@@ -202,7 +148,7 @@ public class Kiosk {
 				System.out.print(" ");
 				x = x - 1;
 			}
-			System.out.print("$" + (2 * berries) + ".00");
+			System.out.print("$" + (0.99 * berries));
 		}	
 		if (grapes == 1) {
 			System.out.print("\n" + grapes + "      " + "Grape ");
@@ -211,7 +157,7 @@ public class Kiosk {
 				System.out.print(" ");
 				x = x - 1;
 			}
-			System.out.print("$" + (2 * grapes) + ".00");
+			System.out.print("$" + (1.99 * grapes));
 		}
 		else if (grapes > 1) {
 			System.out.print("\n" + grapes + "      " + "Grapes");
@@ -220,7 +166,7 @@ public class Kiosk {
 				System.out.print(" ");
 				x = x - 1;
 			}
-			System.out.print("$" + (2 * grapes) + ".00");
+			System.out.print("$" + (1.99 * grapes));
 		}
 		System.out.println("\n");
 		if (total > 10) {
@@ -229,19 +175,19 @@ public class Kiosk {
 				System.out.print(" ");
 				z = z -1;
 			}
-			System.out.println("Tax:     $" + rTax);
+			System.out.println("Tax:      $" + rTax);
 			z = 24;
 			while (z > 0) {
 				System.out.print(" ");
 				z = z -1;
 			}
-			System.out.println("Subtotal:$" + subtotal + ".00");
+			System.out.println("Subtotal: $" + subtotal);
 			z = 24;
 			while (z > 0) {
 				System.out.print(" ");
 				z = z -1;
 			}
-			System.out.println("Total:   $" + total);
+			System.out.println("Total:    $" + rTotal);
 		}
 		if (total < 10) {
 			int z = 25;
@@ -249,20 +195,57 @@ public class Kiosk {
 				System.out.print(" ");
 				z = z -1;
 			}
-			System.out.println("Tax:      $" + rTax);
+			System.out.println("Tax:       $" + rTax);
 			z = 25;
 			while (z > 0) {
 				System.out.print(" ");
 				z = z -1;
 			}
-			System.out.println("Subtotal:$" + subtotal + ".00");
+			System.out.println("Subtotal:$ " + subtotal);
 			z = 25;
 			while (z > 0) {
 				System.out.print(" ");
 				z = z -1;
 			}
-			System.out.println("Total:   $" + total);
+			System.out.println("Total:    $" +rTotal);
 		
 		}
+		System.out.println("****************************************");
+		System.out.println("     Thanks for shopping at Kroger      ");
+		System.out.println("****************************************");
 	}
 } //close class Kiosk
+
+//OLD CODE
+/*String itemNumS = keyboard.nextLine();
+		itemNum = Integer.parseInt(itemNumS);
+		System.out.println("\nYou must type each item exactly how it's listed in the inventory (ex. 1 Apple) ");
+		while (itemNum > 0) {
+			y++;
+			System.out.print("Item " + y + ": ");
+			item =  keyboard.nextLine();
+			if (item.equals("1 Apple")) {
+				subtotal = 2.99 + subtotal;
+				apples++;
+			}
+			else if(item.equals("1 Orange")) {
+				subtotal = 3.99 + subtotal;
+				oranges++;
+			}
+			else if(item.equals("1 Melon")) {
+				subtotal = 6.99 + subtotal;
+				melons++;
+			}
+			else if(item.equals("1 Berrie")) {
+				subtotal = .99 + subtotal;
+				berries++;
+			}
+			else if(item.equals("1 Grape")) {
+				subtotal = 1.99 + subtotal;
+				grapes++;
+			}
+			else {
+				System.out.println("That is not an item. Try Again.");
+				y++;
+			}
+			itemNum = itemNum - 1;*/
