@@ -19,3 +19,10 @@
 * Have fun with the assignment!!       *
 ****************************************
 */
+
+public class Printer() {
+	public Printer() {
+		Kiosk.myKiosk = new Kiosk;
+		System.out.println("****************************************");
+		System.out.println("             Kroger Recipt              ");
+		System.out.println("Qty    Item 
