@@ -26,3 +26,15 @@ public class Printer() {
 		System.out.println("****************************************");
 		System.out.println("             Kroger Recipt              ");
 		System.out.println("Qty    Item 
+
+Version 2:
+				   
+import java.util.Scanner;
+
+public class Printer {
+	public static void main (String[] args) {
+		Kiosk myStand = new Kiosk();
+		myStand.Register();
+		myStand.Printer();
+	}
+}
